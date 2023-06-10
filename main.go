@@ -9,7 +9,7 @@ import (
 func main() {
 	router := gin.Default()
 	config.ConnectDB()
-
+	config.LoadEnv()
 	router.GET("/", controllers.DefaultRequest)
 
 	router.Run("localhost:4040")

@@ -2,10 +2,8 @@ package config
 
 import (
 	"fmt"
-	"log"
 	"os"
 
-	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -18,14 +16,16 @@ func ConnectDB() {
 	DBName := os.Getenv("POSTGRES_DB")
 	DBPort := os.Getenv("POSTGRES_PORT")
 
-	var err error
+	fmt.Printf(DBHost, DBUserName, DBUserPassword, DBName, DBPort)
 
-	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", DBHost, DBUserName, DBUserPassword, DBName, DBPort)
-	db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
-	if err != nil {
-		log.Fatal(err)
-	}
+	// var err error
 
-	fmt.Println("Connected Successfully to the Database")
-	DB = db
+	// dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", DBHost, DBUserName, DBUserPassword, DBName, DBPort)
+	// db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// fmt.Println("Connected Successfully to the Database")
+	// DB = db
 }
