@@ -8,14 +8,14 @@ services:
     env_file:
       - .env
     environment:
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+    depends_on:
+      - db
 
   db:
-    image: postgres:14.2-alpine
+    image: postgres:alpine
     container_name: jlb-db
     restart: always
     env_file:
@@ -24,8 +24,9 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+
     ports:
-      - 5050:5432
+      - 5432:5432
     volumes:
       - db:/var/lib/postgresql/data
 volumes:

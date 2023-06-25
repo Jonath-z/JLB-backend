@@ -5,4 +5,5 @@ WORKDIR /app
 COPY . ./
 RUN go mod download
 
-CMD go run main.go
+EXPOSE 4040
+CMD ["go", "run", "main.go"]

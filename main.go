@@ -19,5 +19,5 @@ func main() {
 	config.ConnectDB()
 	router.GET("/", controllers.DefaultRequest)
 
-	router.Run("localhost:4040")
+	router.Run()
 }

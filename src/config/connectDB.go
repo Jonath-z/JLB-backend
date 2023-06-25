@@ -14,13 +14,11 @@ var DB *gorm.DB
 func ConnectDB() {
 	DBHost := os.Getenv("POSTGRES_HOST")
 	DBUserName := os.Getenv("POSTGRES_USER")
-	DBUserPassword := os.Getenv("POSTGRES_PASSWORD")
+	DBPassword := os.Getenv("POSTGRES_PASSWORD")
 	DBName := os.Getenv("POSTGRES_DB")
 	DBPort := os.Getenv("POSTGRES_PORT")
 
-	// var err error
-
-	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", DBHost, DBUserName, DBUserPassword, DBName, DBPort)
+	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", DBHost, DBUserName, DBPassword, DBName, DBPort)
 	db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
