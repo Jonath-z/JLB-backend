@@ -1,23 +1,23 @@
 package main
 
 import (
-	"log"
-
-	"github.com/Jonath-z/JLB-backend/src/config"
-	"github.com/Jonath-z/JLB-backend/src/controllers"
+	"github.com/Jonath-z/JLB-backend/config"
+	"github.com/Jonath-z/JLB-backend/db"
+	"github.com/Jonath-z/JLB-backend/services"
+	"github.com/Jonath-z/JLB-backend/services/authentication"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
-func main() {
-	err := godotenv.Load()
-	if err != nil{
-		log.Fatal("Cant not load environment variables")
-	}
-	
-	router := gin.Default()
+func init() {
+	config.LoadEnvironmentVariables()
 	config.ConnectDB()
-	router.GET("/", controllers.DefaultRequest)
+	db.Migrate()
+}
+
+func main() {
+	router := gin.Default()
+	router.GET("/", services.DefaultRequest)
+	router.POST("/signup", authentication.Sigup)
 
 	router.Run()
 }
