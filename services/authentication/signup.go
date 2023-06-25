@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Jonath-z/JLB-backend/config"
+	"github.com/Jonath-z/JLB-backend/db/entities"
 	"github.com/Jonath-z/JLB-backend/models"
 	"github.com/Jonath-z/JLB-backend/utilities"
 	"github.com/gin-gonic/gin"
@@ -25,6 +26,10 @@ func Sigup(c *gin.Context) {
 	hashedPassword, _ := utilities.HashPassword(newUser.Password)
 	newUser.Password = hashedPassword
 
-	config.DB.Create(newUser)
+	config.DB.Create(&entities.UserEntity{
+		Name:     &newUser.Username,
+		Email:    newUser.Email,
+		Password: newUser.Password,
+	})
 	c.JSON(http.StatusCreated, newUser)
 }
