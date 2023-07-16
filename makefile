@@ -4,6 +4,6 @@ BIN: JLB-backend
 run-dev: 
 	@docker-compose up
 
-run-docker-build: 
-	docker build -t jlb-backend	.
+run-build: 
+	docker-compose up --build
 
