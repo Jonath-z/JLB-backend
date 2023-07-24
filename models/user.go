@@ -16,3 +16,8 @@ type Product struct {
 	Price     float64 `json:"price"`
 	Image     string  `json:"image"`
 }
+
+type LoginData struct {
+	Password string `json:"password"`
+	Email    string `json:"email"`
+}

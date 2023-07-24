@@ -22,6 +22,15 @@ func Sigup(c *gin.Context) {
 		})
 	}
 
+	existingUser := entities.UserEntity{}
+	checkErr := config.DB.Where("name = ?", newUser.Username).First(&existingUser).Error
+	if checkErr == nil {
+		c.JSON(http.StatusConflict, gin.H{
+			"message": "Username already exists",
+		})
+		return
+	}
+
 	newUser.UserId = uuid.New().String()
 	hashedPassword, _ := utilities.HashPassword(newUser.Password)
 	newUser.Password = hashedPassword
