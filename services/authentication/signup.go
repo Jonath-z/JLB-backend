@@ -39,6 +39,7 @@ func Sigup(c *gin.Context) {
 		Name:     &newUser.Username,
 		Email:    newUser.Email,
 		Password: newUser.Password,
+		UserId:   newUser.UserId,
 	})
 	c.JSON(http.StatusCreated, newUser)
 }

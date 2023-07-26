@@ -10,4 +10,5 @@ type UserEntity struct {
 	ProfileThumbnail *string
 	IsVerified       bool
 	Password         string
+	UserId           string
 }
