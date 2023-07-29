@@ -22,6 +22,7 @@ func GetUserByUserName(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"message": "username not found",
+			"error":   err.Error(),
 		})
 		return
 	}

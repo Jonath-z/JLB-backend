@@ -22,6 +22,8 @@ func main() {
 	router.POST("/login", authentication.Login)
 	router.GET("/users/:username", user.GetUserByUserName)
 	router.GET("/users/get/:id", user.GetUserByUserId)
-	router.PATCH("/users/update", user.UpdateUser)
+	router.PATCH("/users/update/:id", user.UpdateUser)
+	router.GET("/users", user.GetAllUsers)
+	router.DELETE("/users/:id", user.DeleteUser)
 	router.Run()
 }

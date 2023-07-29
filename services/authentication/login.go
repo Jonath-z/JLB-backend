@@ -16,6 +16,7 @@ func Login(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Missing password or email",
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -25,6 +26,7 @@ func Login(c *gin.Context) {
 	if checkEmailErr != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"message": "Incorrect Email",
+			"error":   checkEmailErr.Error(),
 		})
 	} else {
 		isPasswordTrue := utilities.CheckPassword(loginData.Password, user.Password)

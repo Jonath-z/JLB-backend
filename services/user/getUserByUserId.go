@@ -22,6 +22,7 @@ func GetUserByUserId(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"message": "user id not found",
+			"error":   err.Error(),
 		})
 		return
 	}

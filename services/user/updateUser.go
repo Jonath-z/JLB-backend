@@ -1,34 +1,43 @@
 package user
 
 import (
-	"github.com/Jonath-z/JLB-backend/config"
-	"github.com/Jonath-z/JLB-backend/models"
-	"github.com/gin-gonic/gin"
+	"github.com/Jonath-z/JLB-backend/db/entities"
 	"net/http"
+
+	"github.com/Jonath-z/JLB-backend/config"
+	"github.com/gin-gonic/gin"
 )
 
-func UpdateUser(c *gin.Context) {
-	var updatedUser *models.User
+type updatUserRequest struct {
+	Name             string `json:"name,omitempty"`
+	Email            string `json:"email,omitempty"`
+	ProfileThumbnail string `json:"profileThumbnail,omitempty"`
+	ProfileUrl       string `json:"profileUrl,omitempty"`
+}
 
-	err := c.BindJSON(updatedUser)
-	if err != nil {
+func UpdateUser(c *gin.Context) {
+	userId := c.Param("id")
+	var updatedUser = &updatUserRequest{}
+
+	if err := c.BindJSON(updatedUser); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Bad request",
-			"err":     err,
+			"err":     err.Error(),
 		})
-
 		return
 	}
 
-	dbErr := config.DB.Where("user_id = ?", updatedUser.UserId).Updates(models.User{
-		Username:         updatedUser.Username,
+	updateResult := config.DB.Where("user_id = ?", userId).First(&entities.UserEntity{}).Updates(entities.UserEntity{
+		Name:             &updatedUser.Name,
 		Email:            updatedUser.Email,
-		ProfileThumbnail: updatedUser.ProfileThumbnail,
-		ProfileUrl:       updatedUser.ProfileUrl,
-	}).Error
-	if dbErr != nil {
+		ProfileThumbnail: &updatedUser.ProfileThumbnail,
+		ProfileUrl:       &updatedUser.ProfileUrl,
+	})
+
+	if updateResult.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Could not update user",
+			"error":   updateResult.Error.Error(),
 		})
 	} else {
 		c.JSON(http.StatusOK, gin.H{

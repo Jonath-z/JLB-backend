@@ -27,6 +27,7 @@ func Sigup(c *gin.Context) {
 	if checkErr == nil {
 		c.JSON(http.StatusConflict, gin.H{
 			"message": "Username already exists",
+			"error":   checkErr.Error(),
 		})
 		return
 	}
