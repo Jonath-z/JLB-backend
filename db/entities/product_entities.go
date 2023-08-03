@@ -8,5 +8,5 @@ type ProductEntity struct {
 	Name      string
 	Price     float64
 	Image     string
-	UserID    uint
+	UserId    uint `gorm:"column:user_id"`
 }

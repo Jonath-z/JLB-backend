@@ -11,4 +11,5 @@ type UserEntity struct {
 	IsVerified       bool
 	Password         string
 	UserId           string
+	Products         []ProductEntity `gorm:"foreignKey:UserId"`
 }

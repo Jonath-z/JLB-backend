@@ -5,6 +5,7 @@ import (
 	"github.com/Jonath-z/JLB-backend/db"
 	"github.com/Jonath-z/JLB-backend/services"
 	"github.com/Jonath-z/JLB-backend/services/authentication"
+	"github.com/Jonath-z/JLB-backend/services/product"
 	"github.com/Jonath-z/JLB-backend/services/user"
 	"github.com/gin-gonic/gin"
 )
@@ -25,5 +26,10 @@ func main() {
 	router.PATCH("/users/update/:id", user.UpdateUser)
 	router.GET("/users", user.GetAllUsers)
 	router.DELETE("/users/:id", user.DeleteUser)
+
+	router.PUT("/product", product.AddProduct)
+	router.GET("/products/:id", product.GetProductById)
+	router.DELETE("/products/:id", product.DeleteProduct)
+	router.GET("/products", product.GetAllProduct)
 	router.Run()
 }

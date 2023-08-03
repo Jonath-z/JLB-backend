@@ -11,7 +11,7 @@ type User struct {
 }
 
 type Product struct {
-	ProductId string  `json:"productId"`
+	ProductId string  `json:"productId,omitempty"`
 	Name      string  `json:"name"`
 	Price     float64 `json:"price"`
 	Image     string  `json:"image"`
