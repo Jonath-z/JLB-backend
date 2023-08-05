@@ -18,7 +18,7 @@ func GetUserByUserId(c *gin.Context) {
 	}
 
 	user := entities.UserEntity{}
-	err := config.DB.Where("user_id = ?", userId).First(&user).Error
+	err := config.DB.Where("user_id = ?", userId).Preload("Products").First(&user).Error
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"message": "user id not found",

@@ -26,6 +26,8 @@ func main() {
 	router.PATCH("/users/update/:id", user.UpdateUser)
 	router.GET("/users", user.GetAllUsers)
 	router.DELETE("/users/:id", user.DeleteUser)
+	router.DELETE("/users/products/:id", user.RemoveProduct)
+	router.POST("/users/:id", user.SaveProduct)
 
 	router.PUT("/product", product.AddProduct)
 	router.GET("/products/:id", product.GetProductById)
