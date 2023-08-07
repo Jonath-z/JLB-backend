@@ -33,5 +33,6 @@ func main() {
 	router.GET("/products/:id", product.GetProductById)
 	router.DELETE("/products/:id", product.DeleteProduct)
 	router.GET("/products", product.GetAllProduct)
+	router.PATCH("/products/:id", product.UpdateProduct)
 	router.Run()
 }
