@@ -8,6 +8,7 @@ import (
 	"github.com/Jonath-z/JLB-backend/services/product"
 	"github.com/Jonath-z/JLB-backend/services/user"
 	"github.com/gin-gonic/gin"
+	"os"
 )
 
 func init() {
@@ -17,6 +18,8 @@ func init() {
 }
 
 func main() {
+	PORT := os.Getenv("PORT")
+
 	router := gin.Default()
 	router.GET("/", services.DefaultRequest)
 	router.PUT("/signup", authentication.Sigup)
@@ -34,5 +37,5 @@ func main() {
 	router.DELETE("/products/:id", product.DeleteProduct)
 	router.GET("/products", product.GetAllProduct)
 	router.PATCH("/products/:id", product.UpdateProduct)
-	router.Run()
+	router.Run("0.0.0.0" + PORT)
 }
