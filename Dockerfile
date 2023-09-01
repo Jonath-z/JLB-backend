@@ -9,4 +9,5 @@ RUN go mod download
 
 EXPOSE 4040
 
-ENTRYPOINT CompileDaemon --build="go build main.go" --command=./main
+CMD go run main.go
+#ENTRYPOINT CompileDaemon --build="go build main.go" --command=./main
