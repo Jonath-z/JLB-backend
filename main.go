@@ -37,5 +37,5 @@ func main() {
 	router.DELETE("/products/:id", product.DeleteProduct)
 	router.GET("/products", product.GetAllProduct)
 	router.PATCH("/products/:id", product.UpdateProduct)
-	router.Run("0.0.0.0" + PORT)
+	router.Run("0.0.0.0:" + PORT)
 }
